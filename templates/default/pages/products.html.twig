@@ -1,0 +1,48 @@
+{% extends 'default/base.html.twig' %}
+
+{% block banner %}
+    <!--banner-->
+    <div class="banner-top">
+        <div class="container">
+            <h1>Products</h1>
+            <em></em>
+            <h2><a href="/">Home</a><label>/</label>Products</h2>
+        </div>
+    </div>
+{% endblock banner %}
+
+{% block content %}
+    <!--content-->
+    <div class="product">
+        <div class="container">
+
+            {% block products %}
+                {% include 'default/pages/products/products.html.twig' %}
+            {% endblock products %}
+
+            <div class="col-md-3 product-bottom">
+
+                {% block categories %}
+                    {% include 'default/pages/products/categories.html.twig' %}
+                {% endblock categories %}
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block script %}
+
+    {{ parent() }}
+    <!--light-box-files -->
+    <script src="{{ asset('js/jquery.chocolat.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/chocolat.css') }}" type="text/css" media="screen" charset="utf-8">
+    <!--light-box-files -->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('a.picture').Chocolat();
+        });
+    </script>
+{% endblock script %}

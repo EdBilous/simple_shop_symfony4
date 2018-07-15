@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Orders</title>
+
+{% block body %}
+    <h1>Edit Orders</h1>
+
+    {{ include('admin/pages/orders/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_orders_list') }}">back to list</a>
+
+    {{ include('admin/pages/orders/_delete_form.html.twig') }}
+{% endblock %}

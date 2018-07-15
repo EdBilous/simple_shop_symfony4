@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+<div class="quantity">
+    {#<div class="quantity-select">#}
+    {#<div class="entry value-minus">&nbsp;</div>#}
+    {#<div class="entry value"><span></span></div>#}
+    {{ form_row(form.quantity) }}
+    {#<div class="entry value-plus active">&nbsp;</div>#}
+    {#</div>#}
+</div>
+<input type="submit" class="add-to item_add hvr-skew-backward" value="Add to Cart">
+{{ form_end(form) }}

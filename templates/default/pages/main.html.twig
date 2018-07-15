@@ -1,0 +1,63 @@
+{% extends 'default/base.html.twig' %}
+
+{% block banner %}
+    <div class="banner">
+        <div class="container">
+            <section class="rw-wrapper">
+                <h1 class="rw-sentence">
+                    <span>Fashion &amp; Beauty</span>
+                    <div class="rw-words rw-words-1">
+                        <span>Beautiful Designs</span>
+                        <span>Sed ut perspiciatis</span>
+                        <span> Totam rem aperiam</span>
+                        <span>Nemo enim ipsam</span>
+                        <span>Temporibus autem</span>
+                        <span>intelligent systems</span>
+                    </div>
+                    <div class="rw-words rw-words-2">
+                        <span>We denounce with right</span>
+                        <span>But in certain circum</span>
+                        <span>Sed ut perspiciatis unde</span>
+                        <span>There are many variation</span>
+                        <span>The generated Lorem Ipsum</span>
+                        <span>Excepteur sint occaecat</span>
+                    </div>
+                </h1>
+            </section>
+        </div>
+    </div>
+{% endblock banner %}
+
+{% block content %}
+    <!--content-->
+    <div class="content">
+        <div class="container">
+
+            {% block contentTop %}
+                {% include 'default/pages/main/content-top.html.twig' %}
+            {% endblock contentTop %}
+            <!--products-->
+            {% block products %}
+                {% include 'default/pages/main/products-new.html.twig' %}
+            {% endblock products %}
+
+        </div>
+
+    </div>
+    <!--//content-->
+{% endblock content %}
+
+{% block script %}
+
+    {{ parent() }}
+
+    <!--light-box-files -->
+    <script src="{{ asset('js/jquery.chocolat.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/chocolat.css') }}" type="text/css" media="screen" charset="utf-8">
+    <!--light-box-files -->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('a.picture').Chocolat();
+        });
+    </script>
+{% endblock script %}

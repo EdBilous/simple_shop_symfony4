@@ -1,0 +1,68 @@
+{% if cart is empty %}
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-notice" style="color: #31b131">
+           <h3>{{ message }}</h3>
+        </div>
+    {% endfor %}
+    <div class="four">
+        <a href="/" class="hvr-skew-backward">add product</a>
+    </div>
+{% else %}
+    {#{{ dump() }}#}
+    <div class="bs-example4" data-example-id="simple-responsive-table">
+        <div class="table-responsive">
+            <table class="table-heading simpleCart_shelfItem">
+                <tr>
+                    <th class="table-grid">Item</th>
+                    <th>Prices</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+                {% set totalPrice = 0 %}
+                {% for item in cart %}
+                    {% set totalPrice = totalPrice + item.totalPrice %}
+                    <tr class="cart-header">
+                        <td class="ring-in">
+                            <a href="{{ path('show_route',{ 'slug': item.product.getSlug }) }}" class="at-in">
+                                <img src="{{ asset('uploads/images/' ~ item.product.images |first) }}"
+                                     class="img-responsive" alt="">
+                            </a>
+                            <div class="sed">
+                                <h5><a href="{{ path('show_route',{ 'slug': item.product.getSlug }) }}">
+                                        {{ item.product.name }}
+                                    </a></h5>
+                            </div>
+                        </td>
+                        <td>
+                            {{ item.product.price }}
+                        </td>
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+                        <td class="item_price">
+                            {{ item.totalPrice }}
+                        </td>
+                        <td class="add-check">
+                            <a class="item_add hvr-skew-backward"
+                               href="{{ path('checkout_delate_product',{'product': item.product.id}) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Order price : {{ totalPrice }} $</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {#{{ form_row(form.totalPrice, {data :  totalPrice }) }}#}
+                    <input type="hidden" name="totalPrice" value={{ totalPrice }}>
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}

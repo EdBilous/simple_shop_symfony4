@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    {% block title %}{% endblock %}
+
+    {% block style %}
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
+        <!-- Custom Theme files -->
+        <!--theme-style-->
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all"/>
+        <!--//theme-style-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="keywords" content="shop"/>
+        <script type="application/x-javascript"> addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            } </script>
+        <!--theme-style-->
+        <link href="{{ asset('css/style4.css') }}" rel="stylesheet" type="text/css" media="all"/>
+        <!--//theme-style-->
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <!---d start-rate---->
+        <script src="{{ asset('js/jstarbox.js') }}"></script>
+
+        <link rel="stylesheet" href="{{ asset('css/jstarbox.css') }}" type="text/css" media="screen" charset="utf-8"/>
+        <script type="text/javascript">
+            jQuery(function () {
+                jQuery('.starbox').each(function () {
+                    var starbox = jQuery(this);
+                    starbox.starbox({
+                        average: starbox.attr('data-start-value'),
+                        changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                        ghosting: starbox.hasClass('ghosting'),
+                        autoUpdateAverage: starbox.hasClass('autoupdate'),
+                        buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                        stars: starbox.attr('data-star-count') || 5
+                    }).bind('starbox-value-changed', function (event, value) {
+                        if (starbox.hasClass('random')) {
+                            var val = Math.random();
+                            starbox.next().text(' ' + val);
+                            return val;
+                        }
+                    })
+                });
+            });
+        </script>
+        <!---//End-rate---->
+        <link href="{{ asset('css/form.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    {% endblock style %}
+
+</head>
+<body>
+
+{% block header %}
+    {% include 'default/base/header.html.twig' %}
+{% endblock header %}
+
+{% block banner %}{% endblock banner %}
+
+{% block content %}{% endblock content %}
+
+{% block brand %}
+    {% include 'default/base/brand.html.twig' %}
+{% endblock brand %}
+
+{% block footer %}
+    {% include 'default/base/footer.html.twig' %}
+{% endblock footer %}
+
+{% block script %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ asset('js/simpleCart.min.js') }}"></script>
+    <!-- slide -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{% endblock script %}
+
+</body>
+</html>

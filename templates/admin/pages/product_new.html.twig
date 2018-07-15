@@ -1,0 +1,101 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div id="page-wrapper">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Product</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        New
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                {{ form_start(form) }}
+                                    {{ form_row(form.name) }}
+                                    {{ form_row(form.description) }}
+                                    {{ form_row(form.price) }}
+                                <ul class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
+                                    {% for image in form.images %}
+                                        <li>{{ form_row(image.file) }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('/admin/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+    <script>
+        // setup an "add a tag" link
+        var $addImageLink = $('<a href="#" class="add_image_link">add image</a>');
+        var $newLinkLi = $('<li></li>').append($addImageLink);
+
+        jQuery(document).ready(function() {
+            // Get the ul that holds the collection of tags
+            var $collectionHolder = $('ul.images');
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addImageLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see code block below)
+                addImageForm($collectionHolder, $newLinkLi);
+            });
+
+
+        });
+
+        function addImageForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '$$name$$' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            http://jsfiddle.net/847Kf/4/#
+                // also add a remove button, just for this example
+                $newFormLi.append('<a href="#" class="remove-image">x</a>');
+
+            $newLinkLi.before($newFormLi);
+
+            // handle the removal, just for this example
+            $('.remove-image').click(function(e) {
+                e.preventDefault();
+
+                $(this).parent().remove();
+
+                return false;
+            });
+        }
+    </script>
+{% endblock content %}

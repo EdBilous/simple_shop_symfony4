@@ -1,0 +1,53 @@
+<div class="content-mid">
+    <h3>New Items</h3>
+    <label class="line"></label>
+
+    <div class="mid-popular">
+        {% for product in products %}
+        <div class="col-md-3 item-grid simpleCart_shelfItem">
+            <div class=" mid-pop">
+                <div class="pro-img">
+
+                    <img src="{{ asset('uploads/images/' ~ product.images |first) }}" class="img-responsive" alt="">
+                    {% for image in product.images %}
+                        <div class="zoom-icon ">
+                            <a class="picture" href="{{ asset('uploads/images/' ~image) }}" rel="title"
+                               class="b-link-stripe b-animate-go  thickbox"><i
+                                        class="glyphicon glyphicon-search icon "></i></a>
+                            <a href="{{ path('show_route', { 'slug': product.getSlug }) }}"><i
+                                        class="glyphicon glyphicon-menu-right icon"></i></a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="mid-1">
+                    <div class="women">
+                        <div class="women-top">
+                                <span>{{ product.category }}</span><br>
+                            <h6>
+                                <a href="{{ path('show_route',
+                                    { 'slug': product.getSlug }) }}">
+                                    {{ product.getName }}
+                                </a>
+                            </h6>
+                        </div>
+                        <div class="img item_add">
+                            <a href="{{ path('show_route',
+                                { 'slug': product.getSlug }) }}"><img src="{{ asset('images/ca.png') }}" alt=""></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="mid-2">
+                        <p> <em class="item_price">{{ product.getPrice }}</em></p>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>

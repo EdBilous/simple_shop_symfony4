@@ -1,0 +1,60 @@
+{% extends 'default/base.html.twig' %}
+
+{% block banner %}
+    <div class="banner-top">
+        <div class="container">
+            <h1>Single</h1>
+            <em></em>
+            <h2><a href="/">Home</a><label>/</label>Single</h2>
+        </div>
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-notice" style="color: #31b131">
+                <a style="color: white" href="{{ path('checkout_route') }}">
+                 <h3>{{ message }}</h3></a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock banner %}
+
+{% block content %}
+
+    <div class="single">
+        <div class="container">
+
+            {% block product %}
+                {% include 'default/pages/show/product.html.twig' %}
+            {% endblock product %}
+
+            <div class="col-md-3 product-bottom product-at">
+
+                {% block categories %}
+                    {% include 'default/pages/products/categories.html.twig' %}
+                {% endblock categories %}
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+    <script src="{{ asset('js/imagezoom.js') }}"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script defer src="{{ asset('js/jquery.flexslider.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}" type="text/css" media="screen"/>
+
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+
+    {{ parent() }}
+
+{% endblock script %}

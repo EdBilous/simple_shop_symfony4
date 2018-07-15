@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {# render the task's only field: description #}
+    {{ form_row(form.name) }}
+
+{#<ul class="">#}
+    {# iterate over each existing tag and render its only field: name #}
+    {#{% for tag in form.images %}#}
+        {#<li>{{ form_row(tag.src) }}</li>#}
+    {#{% endfor %}#}
+{#</ul>#}
+{{ form_end(form) }}

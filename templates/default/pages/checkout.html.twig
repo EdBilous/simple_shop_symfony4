@@ -1,0 +1,47 @@
+{% extends "default/base.html.twig" %}
+
+{% block banner %}
+    <div class="banner-top">
+        <div class="container">
+            <h1>Checkout</h1>
+            <em></em>
+            <h2><a href="/">Home</a><label>/</label>Checkout</h2>
+        </div>
+    </div>
+{% endblock banner %}
+
+{% block content %}
+
+ {#{% block scripts %}#}
+     {#<script>$(document).ready(function (c) {#}
+             {#$('.close1').on('click', function (c) {#}
+                 {#$('.cart-header').fadeOut('slow', function (c) {#}
+                     {#$('.cart-header').remove();#}
+                 {#});#}
+             {#});#}
+         {#});#}
+     {#</script>#}
+     {#<script>$(document).ready(function (c) {#}
+             {#$('.close2').on('click', function (c) {#}
+                 {#$('.cart-header1').fadeOut('slow', function (c) {#}
+                     {#$('.cart-header1').remove();#}
+                 {#});#}
+             {#});#}
+         {#});#}
+     {#</script>#}
+     {#<script>$(document).ready(function (c) {#}
+             {#$('.close3').on('click', function (c) {#}
+                 {#$('.cart-header2').fadeOut('slow', function (c) {#}
+                     {#$('.cart-header2').remove();#}
+                 {#});#}
+             {#});#}
+         {#});#}
+     {#</script>#}
+ {#{% endblock scripts %}#}
+    <div class="check-out">
+        <div class="container">
+            {% include 'default/pages/checkout/item_table.html.twig' %}
+        </div>
+    </div>
+
+{% endblock content %}

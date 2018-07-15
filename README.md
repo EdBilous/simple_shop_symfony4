@@ -1,1 +1,2 @@
-# simple_shop_symfony4
+# ecomers_studies
+
