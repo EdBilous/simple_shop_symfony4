@@ -12,8 +12,9 @@ class CartType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', IntegerType::class, ['data' => '1',
-                'label' => false, 'attr' => ['class' => 'form-control']])
+            ->add('quantity', IntegerType::class, [ 'data' => '1',
+                'label' => false, 'attr' => ['type'=> "number", 'min' => '1',
+                    'max' => '50', 'class' => 'form-control']])
         ;
     }
 }

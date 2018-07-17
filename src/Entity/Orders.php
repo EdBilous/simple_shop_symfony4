@@ -50,7 +50,7 @@ class Orders
 
     /**
      * Status of card. 0: discard. 1: active. 2: appruved. 3: complete.
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=20)
      */
     private $status;
 
@@ -83,7 +83,7 @@ class Orders
 
     public function __construct()
     {
-        $this->status = 1;
+        $this->status = 'active';
         $this->productOrders = new ArrayCollection();
     }
 

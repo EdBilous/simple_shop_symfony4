@@ -40,9 +40,8 @@ class DefaultController extends Controller
     /**
      * @Route("show/{slug}", name="show_route")
      */
-    public function show($slug, Request $request, ProductRepository $repository, CartManagerService $cartManager)
+    public function show(Product $product, Request $request, CartManagerService $cartManager)
     {
-        $product = $repository->findOneBy(['slug' => $slug]);
         if (!$product) {
             throw $this->createNotFoundException('Unable to find Product.');
         }
@@ -106,8 +105,9 @@ class DefaultController extends Controller
      */
     public function deleteProduct(Request $request, Product $product, CartManagerService $cartManager)
     {
-//        dump($request->headers);
-        $cartManager->deleteProductFromCart($product);
+        if($product){
+            $cartManager->deleteProductFromCart($product);
+        }
         return $this->redirect($request->headers->get('referer'));
     }
 

@@ -23,16 +23,16 @@
                                id="dataTables-example">
                                 <tbody>
                                 <tr>
-                                    <th>TotalPrice</th>
+                                    <th>Order Price</th>
                                     <td>{{ order.totalPrice }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Customer Name</th>
+                                    <td>{{ order.userName }}</td>
                                 </tr>
                                 <tr>
                                     <th>Phone</th>
                                     <td>{{ order.phone }}</td>
-                                </tr>
-                                <tr>
-                                    <th>UserName</th>
-                                    <td>{{ order.userName }}</td>
                                 </tr>
                                 <tr>
                                     <th>Address</th>
@@ -43,8 +43,12 @@
                                     <td>{{ order.city }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Comment</th>
+                                    <td>{{ order.comment }}</td>
+                                </tr>
+                                <tr>
                                     <th>Status</th>
-                                    <td>{{ order.status }}</td>
+                                    <td>{{ include('admin/pages/orders/change_status_form.html.twig') }}</td>
                                 </tr>
                                 <tr>
                                     <th>CreatedAt</th>
@@ -76,7 +80,7 @@
                                 <tr class="cart-header">
                                     <td class="ring-in">
                                         <a href="{{ path('show_route',{ 'slug': item.product.getSlug }) }}" class="at-in">
-                                            <img width="10%" src="{{ asset('uploads/images/' ~ item.product.images |first) }}">
+                                            <img height="10%" src="{{ asset('uploads/images/' ~ item.product.images |first) }}">
                                         </a>
                                     </td>
                                     <td>
@@ -97,6 +101,7 @@
                         </table>
                     </div>
                 </div>
+                {{ include('admin/pages/orders/_delete_form.html.twig') }}
                 <!-- /.col-lg-6 -->
             </div>
             <!-- /.row -->

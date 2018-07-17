@@ -28,7 +28,6 @@
                                 <th>Price</th>
                                 <th>CreatedAt</th>
                                 <th>Category</th>
-                                {#<th>Type</th>#}
                                 <th>Brand</th>
                                 <th>Actions</th>
                             </tr>
@@ -41,7 +40,7 @@
                                     <td>
                                         {% if product.images %}
                                             {% for image in product.images %}
-                                                <img width="10%" src="{{ asset('uploads/images/' ~ image) }}">
+                                                <img height="10%" src="{{ asset('uploads/images/' ~ image) }}">
                                             {% endfor %}
                                         {% endif %}
                                     </td>
@@ -49,8 +48,7 @@
                                     <td>{{ product.description }}</td>
                                     <td>{{ product.price }}</td>
                                     <td>{{ product.createdAt|date('Y-m-d') }}</td>
-                                    <td> {{ product.category }}</td>
-                                    {#<td>{{ product.itype }}</td>#}
+                                    <td>{{ product.category }}</td>
                                     <td>{{ product.brand }}</td>
                                     <td>
                                         <ul>

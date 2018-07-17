@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Brand;
 use App\Entity\Category;
 use App\Entity\Orders;
 use App\Entity\Product;
 use App\Entity\ProductImage;
 use App\Entity\User;
+use App\Form\BrandType;
 use App\Form\CategoryType;
 use App\Form\OrdersType;
 use App\Form\ProductType;
@@ -38,7 +40,6 @@ class AdminController extends Controller
 
     /**
      * @Route("/products-list", name="admin_products")
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function productsList(ProductRepository $productRepository)
     {
@@ -144,8 +145,31 @@ class AdminController extends Controller
             return $this->redirectToRoute('admin_products');
         }
 
-        return $this->render('admin/pages/_new.html.twig', [
+        return $this->render('admin/pages/category_new.html.twig', [
             'category' => $category,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/brand/new", name="admin_brand_new", methods="GET|POST")
+     */
+    public function brandNew(Request $request)
+    {
+        $brand = new Brand();
+        $form = $this->createForm(BrandType::class, $brand);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($brand);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_products');
+        }
+
+        return $this->render('admin/pages/brand_new.html.twig', [
+            'brand' => $brand,
             'form' => $form->createView(),
         ]);
     }
@@ -167,12 +191,13 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/orders", name="admin_orders_list", methods="GET")
+     * @Route("/orders", name="admin_orders_list")
      */
     public function ordersList(OrdersRepository $ordersRepository)
     {
+
         return $this->render('admin/pages/orders/orders_list.html.twig', [
-            'orders' => $ordersRepository->findAll()]);
+            'orders' => $ordersRepository->findAllOrders()]);
     }
 
     /**
@@ -202,23 +227,36 @@ class AdminController extends Controller
                 'id' => $order->getId()]);
         }
 
-        return $this->render('admin/pages/orders/edit.html.twig', [
+        return $this->render('admin/pages/orders/order_edit.html.twig', [
             'order' => $order,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/orders/{id}/del", name="orders_delete", methods="DELETE")
+     * @Route("/orders/{id}/status_change", name="orders_change_status", methods="POST")
      */
-    public function orderDelete(Request $request, Orders $order)
+    public function orderChangeStatus(Request $request, Orders $order, OrderManagerService $orderManager)
     {
-        if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($order);
-            $em->flush();
+        if ($this->isCsrfTokenValid('change'.$order->getId(), $request->request->get('_token'))) {
+            $status = $request->request->get('status');
+            $orderId = $request->request->get('orderId');
+
+                $orderManager->changeOrderStatus($orderId, $status);
         }
 
-        return $this->redirectToRoute('orders_index');
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/orders/{id}/del", name="orders_delete", methods="DELETE")
+     */
+    public function orderDelete(Request $request, Orders $order, OrderManagerService $orderManager)
+    {
+        if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
+            $orderManager->deleteOrder($order);
+        }
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }

@@ -28,7 +28,8 @@ class OrdersType extends AbstractType
             ->add('city',null, ['label' => "City", 'attr' => [
                 'placeholder' => 'Kharkiv',
                 'class' => 'form-control']])
-            ->add('comment', TextareaType::class, ['label' => "Comment", 'attr' => [
+            ->add('comment', TextareaType::class, ['required'   => false,
+                'label' => "Comment", 'attr' => [
                 'placeholder' => '',
                 'class' => 'form-control']])
             ->add('submit', SubmitType::class, [

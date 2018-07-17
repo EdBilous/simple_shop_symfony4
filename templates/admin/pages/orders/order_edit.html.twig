@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Category</h1>
+                <h1 class="page-header">Order</h1>
             </div>
         </div>
 
@@ -14,19 +14,18 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        New
+                        Edit
                     </div>
 
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-6">
-                                {{ form_start(form) }}
-                                {{ form_widget(form) }}
-                                {{ form_end(form) }}
+                                {{ include('admin/pages/orders/_form.html.twig', {'button_label': 'Update'}) }}
+                                {{ include('admin/pages/orders/_delete_form.html.twig') }}
                             </div>
                         </div>
                     </div>
-
+                    <a href="{{ path('admin_orders_list') }}">back to list</a>
                 </div>
             </div>
         </div>

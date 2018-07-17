@@ -27,6 +27,7 @@
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>Phone</th>
+                                <th>Comment</th>
                                 <th>Date</th>
                                 <th>Status</th>
                                 <th>actions</th>
@@ -41,8 +42,11 @@
                                     <td>{{ order.address }}</td>
                                     <td>{{ order.city }}</td>
                                     <td>{{ order.phone }}</td>
+                                    <td>{{ order.comment }}</td>
                                     <td>{{ order.createdAt ? order.createdAt|date('Y-m-d') : '' }}</td>
-                                    <td>{{ order.status }}</td>
+                                    <td>
+                                        {{ include('admin/pages/orders/change_status_form.html.twig') }}
+                                    </td>
                                     <td>
                                         <ul>
                                             <li>
@@ -50,6 +54,9 @@
                                             </li>
                                             <li>
                                                 <a href="{{ path('orders_edit', {'id': order.id}) }}">edit</a>
+                                            </li>
+                                            <li>
+                                            {{ include('admin/pages/orders/_delete_form.html.twig') }}
                                             </li>
                                         </ul>
                                     </td>

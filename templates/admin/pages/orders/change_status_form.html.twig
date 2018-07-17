@@ -1,0 +1,11 @@
+<form action="{{ path('orders_change_status', {'id': order.id}) }}" method="POST">
+    <input type="hidden" name="_token" value="{{ csrf_token('change' ~ order.id) }}">
+    <select style="width: auto;" class="form-control form-control-sm" name="status">
+        <option selected disabled>{{ order.status }}</option>
+        <option value="discard">discard</option>
+        <option value="active">active</option>
+        <option value="appruved">appruved</option>
+        <option value="completed">completed</option>
+    </select>
+    <button type="submit" name="orderId" value="{{ order.id }}" class="">change</button>
+</form>

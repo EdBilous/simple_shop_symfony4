@@ -97,5 +97,24 @@ class OrderManagerService
     public function deleteOrder(Orders $orders)
     {
 
+        if ($orders->getProductOrders()){
+            foreach ($orders->getProductOrders() as $productOrder){
+                $orders->removeProductOrder($productOrder);
+                $this->em->remove($productOrder);
+            }
+        }
+
+//        removeImage
+//        removeReview
+        $this->em->remove($orders);
+        $this->em->flush();
+
+    }
+
+    public function changeOrderStatus($OrderId, $status)
+    {
+        $order = $this->op->find($OrderId);
+        $order->setStatus($status);
+        $this->em->flush();
     }
 }
